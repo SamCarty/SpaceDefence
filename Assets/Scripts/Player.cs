@@ -109,16 +109,24 @@ public class Player : MonoBehaviour
         damageDealer.Hit();
         if (health <= 0)
         {
-            PlayDeathAnimation();
+            Kill();
             Destroy(gameObject);
         }
     }
     
-    private void PlayDeathAnimation() {
-        AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position);
+    private void Kill() {
+        // play the death sound effect at the camera's position
+        AudioSource.PlayClipAtPoint(explosionSound, camera.transform.position);
+        
+        // play the death animation effect at the player's last position
         var explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         ParticleSystem vfx = explosion.GetComponent<ParticleSystem>();
         float waitTime = vfx.main.duration;
+        
+        // change the scene to the game over scene
+        FindObjectOfType<LevelLoader>().LoadGameOver();
+        
+        // finally, remove our player from the world
         Destroy(vfx, waitTime);
     }
 }
