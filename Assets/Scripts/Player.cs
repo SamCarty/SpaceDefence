@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Config params
     [Header("Player")]
-    [SerializeField] private float health = 300f;
+    [SerializeField] private int health = 3;
     [SerializeField] private float moveSpeed = 10f;
     
     [Header("Weapons")]
@@ -24,15 +23,12 @@ public class Player : MonoBehaviour
     [SerializeField] AudioClip explosionSound;
     [SerializeField] AudioClip laserSound;
     
-    // Local variables
     private Coroutine firingCoroutine;
-
     private float xMin;
     private float xMax;
     private float yMin;
     private float yMax;
-
-    Camera camera;
+    private Camera camera;
 
     void Start()
     {
@@ -56,6 +52,10 @@ public class Player : MonoBehaviour
     {
         Move();
         Fire();
+    }
+
+    public int GetHealth() {
+        return health;
     }
 
     private void Move()

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,7 +9,12 @@ public class LevelLoader : MonoBehaviour
     MusicBox musicBox;
 
     void Awake() {
-        DontDestroyOnLoad(transform.gameObject);
+        if (FindObjectsOfType(GetType()).Length > 1) {
+            Destroy(gameObject);
+        }
+        else {
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     void Start() {
@@ -25,6 +29,7 @@ public class LevelLoader : MonoBehaviour
     }
 
     public void LoadGame() {
+        FindObjectOfType<CurrentGame>().ResetGame();
         SceneManager.LoadScene("Level");
         musicBox = GetMusicBox();
         musicBox.PlayGameMusic();

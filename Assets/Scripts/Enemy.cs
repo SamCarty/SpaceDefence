@@ -3,14 +3,15 @@
 public class Enemy : MonoBehaviour
 {
     [Header("Enemy")]
-    [SerializeField] private float health = 100f;
+    [SerializeField] int health = 1;
+    [SerializeField] int scoreOnKill = 1;
     
     [Header("Weapons")]
-    [SerializeField] private float shotCounter;
-    [SerializeField] private float minTimeBetweenShots = 0.2f;
-    [SerializeField] private float maxTimeBetweenShots = 3f;
-    [SerializeField] private GameObject laserPrefab;
-    [SerializeField] private float laserSpeed = 10f;
+    [SerializeField] float shotCounter;
+    [SerializeField] float minTimeBetweenShots = 0.2f;
+    [SerializeField] float maxTimeBetweenShots = 3f;
+    [SerializeField] GameObject laserPrefab;
+    [SerializeField] float laserSpeed = 10f;
     
     [Header("Particle System")]
     [SerializeField] GameObject explosionPrefab;
@@ -27,12 +28,12 @@ public class Enemy : MonoBehaviour
         shotCounter = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
     }
 
-    private void Update()
+    void Update()
     {
         CountDownAndShoot();
     }
 
-    private void CountDownAndShoot()
+    void CountDownAndShoot()
     {
         shotCounter -= Time.deltaTime;
         if (shotCounter <= 0f)
@@ -42,35 +43,43 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Fire() {
+    void Fire() {
         if (camera != null) AudioSource.PlayClipAtPoint(laserSound, camera.transform.position);
         
         var laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
         laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -laserSpeed);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         var damageDealer = other.gameObject.GetComponent<DamageDealer>();
         if (!damageDealer) return;
         ProcessHit(damageDealer);
     }
 
-    private void ProcessHit(DamageDealer damageDealer)
+    void ProcessHit(DamageDealer damageDealer)
     {
         health -= damageDealer.GetDamage();
         damageDealer.Hit();
         if (health <= 0) {
-            PlayDeathAnimation();
+            Kill();
             Destroy(gameObject);
         }
     }
 
-    private void PlayDeathAnimation() {
+    void Kill() {
+        // update the score
+        FindObjectOfType<CurrentGame>().AddToScore(scoreOnKill);
+        
+        // play the death sound effect at the camera's position
         AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position);
+        
+        // play the death animation effect at the player's last position
         var explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         ParticleSystem vfx = explosion.GetComponent<ParticleSystem>();
         float waitTime = vfx.main.duration;
+        
+        // finally, remove our enemy from the world
         Destroy(vfx, waitTime);
     }
 }

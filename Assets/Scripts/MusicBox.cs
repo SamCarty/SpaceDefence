@@ -14,6 +14,7 @@ public class MusicBox : MonoBehaviour {
 
     void SetupSingleton() {
         if (FindObjectsOfType(GetType()).Length > 1) {
+            gameObject.SetActive(false);
             Destroy(gameObject);
         }
         else {
