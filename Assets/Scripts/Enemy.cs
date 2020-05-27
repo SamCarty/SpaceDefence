@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] int scoreOnKill = 1;
     
     [Header("Weapons")]
-    [SerializeField] float shotCounter;
     [SerializeField] float minTimeBetweenShots = 0.2f;
     [SerializeField] float maxTimeBetweenShots = 3f;
     [SerializeField] GameObject laserPrefab;
@@ -20,6 +19,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] AudioClip explosionSound;
     [SerializeField] AudioClip laserSound;
     
+    float shotCounter;
     Camera camera;
     
     void Start()

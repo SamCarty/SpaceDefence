@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 7533224997981444592}
   - component: {fileID: 7533224997981444593}
   - component: {fileID: 6760525932068440964}
-  - component: {fileID: -8816758187569612047}
-  - component: {fileID: 8924586375127306333}
-  - component: {fileID: -7330130222316445779}
-  - component: {fileID: 564417506150361094}
+  - component: {fileID: -1792822528814144954}
+  - component: {fileID: 2084310540417819122}
+  - component: {fileID: -6811423188475762323}
+  - component: {fileID: -4803585168709074093}
   m_Layer: 9
-  m_Name: Enemy A
+  m_Name: Enemy Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,12 +75,12 @@ SpriteRenderer:
   m_SortingLayerID: -652924305
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4f2f9fa3e322a8144894da22cc391c2e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a0ad53f8abab3b748a316e529f1b8d2e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.97, y: 0.84}
+  m_Size: {x: 1.03, y: 0.84}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1244420bba1edd945ad393838d060323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-8816758187569612047
+--- !u!114 &-1792822528814144954
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,19 +110,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af28bb1db00daf45b80659286a74306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
-  scoreOnKill: 100
-  shotCounter: 0
+  health: 8
+  scoreOnKill: 2500
   minTimeBetweenShots: 0.2
-  maxTimeBetweenShots: 3
-  laserPrefab: {fileID: 1025530930682353351, guid: 98060723f13d6dd4399304808053e623,
+  maxTimeBetweenShots: 1
+  laserPrefab: {fileID: 7936571668123745055, guid: 2c5a6c2c13838d947824165b537254c8,
     type: 3}
-  laserSpeed: 10
+  laserSpeed: 6
   explosionPrefab: {fileID: 5948631766859576275, guid: d6ed3234dbb67ce40947a4c9708b6de9,
     type: 3}
   explosionSound: {fileID: 8300000, guid: 0f966c6f982ecbe48bfe8c6e0786dc9e, type: 3}
   laserSound: {fileID: 8300000, guid: 38fbcf6fa5d891f40b402ef8a5e0b1f1, type: 3}
---- !u!58 &8924586375127306333
+--- !u!58 &2084310540417819122
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,8 +136,8 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.44
---- !u!50 &-7330130222316445779
+  m_Radius: 0.42
+--- !u!50 &-6811423188475762323
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -159,7 +158,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &564417506150361094
+--- !u!114 &-4803585168709074093
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
