@@ -9,8 +9,17 @@ public class MusicBox : MonoBehaviour {
     AudioClip currentlyPlaying;
 
     void Awake() {
-        DontDestroyOnLoad(transform.gameObject);
-        audioSource = GetComponent<AudioSource>();
+        SetupSingleton();
+    }
+
+    void SetupSingleton() {
+        if (FindObjectsOfType(GetType()).Length > 1) {
+            Destroy(gameObject);
+        }
+        else {
+            DontDestroyOnLoad(transform.gameObject);
+            audioSource = GetComponent<AudioSource>();
+        }
     }
 
     public void PlayMenuMusic() {
